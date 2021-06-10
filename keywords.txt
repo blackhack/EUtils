@@ -1,0 +1,33 @@
+#######################################
+#   Syntax  Coloring
+#######################################
+
+#######################################
+#   Classes (KEYWORD1)
+#######################################
+ETimer				KEYWORD1
+EButton				KEYWORD1
+#######################################
+#   Methods and Functions (KEYWORD2)
+####################################### 
+HasExpire			KEYWORD2
+Start				KEYWORD2
+Stop				KEYWORD2
+IsActive			KEYWORD2
+SetupButton			KEYWORD2
+SetCallBack			KEYWORD2
+SetDebounceDuration	KEYWORD2
+SetHoldDuration		KEYWORD2
+Update				KEYWORD2
+IsBeingPush			KEYWORD2
+Pushed				KEYWORD2
+Released			KEYWORD2
+Holded				KEYWORD2
+######################################
+# Constants (LITERAL1)
+######################################
+BUTTON_CALLBACK_EVENT	LITERAL1
+BUTTON_STAND_BY		LITERAL1
+BUTTON_PUSHED		LITERAL1
+BUTTON_RELEASED		LITERAL1
+BUTTON_HOLDED		LITERAL1
