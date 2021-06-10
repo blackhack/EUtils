@@ -49,6 +49,13 @@ void ETimer::Start(uint32_t duration, bool oneShot, bool microSeconds)
     _initialTime = (_microSeconds ? micros() : millis());
 }
 
+uint32_t ETimer::RemainingDuration()
+{
+    uint32_t currentTime = (_microSeconds ? micros() : millis());
+
+    return _duration - (currentTime - _initialTime);
+}
+
 void EButton::SetupButton(uint8_t pin, uint8_t input_mode, bool inverted_logic)
 {
     pinMode(pin, input_mode);
@@ -72,8 +79,9 @@ void EButton::SetCallBack(button_callback_type callback, void* parameter /*= nul
     _callback_parameter = parameter;
 }
 
-void EButton::Update()
+bool EButton::Update()
 {
+    bool state_change = false;
     int8_t state = digitalRead(_pin);
 
     if (_last_debounce_state != state && !_debounce_timer.IsActive())
@@ -89,6 +97,7 @@ void EButton::Update()
         {
             _hold_timer.Start(_hold_duration);
             _was_pushed = true;
+            state_change = true;
 
             if (_callback_function)
                 _callback_function(_callback_parameter, BUTTON_PUSHED);
@@ -97,6 +106,7 @@ void EButton::Update()
         {
             _hold_timer.Stop();
             _was_released = true;
+            state_change = true;
 
             if (_callback_function)
                 _callback_function(_callback_parameter, BUTTON_RELEASED);
@@ -106,10 +116,13 @@ void EButton::Update()
     if (IsBeingPush() && _hold_timer.HasExpire())
     {
         _was_holded = true;
+        state_change = true;
 
         if (_callback_function)
             _callback_function(_callback_parameter, BUTTON_HOLDED);
     }
+
+    return state_change;
 }
 
 bool EButton::IsBeingPush()

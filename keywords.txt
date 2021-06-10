@@ -13,6 +13,7 @@ EButton				KEYWORD1
 HasExpire			KEYWORD2
 Start				KEYWORD2
 Stop				KEYWORD2
+RemainingDuration	KEYWORD2
 IsActive			KEYWORD2
 SetupButton			KEYWORD2
 SetCallBack			KEYWORD2

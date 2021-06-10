@@ -29,6 +29,7 @@ public:
     bool HasExpire();
     void Start(uint32_t duration, bool oneShot = true, bool microSeconds = false);
     void Stop() { _active = false; }
+    uint32_t RemainingDuration();
     bool IsActive() { return _active; }
 
 private:
@@ -56,7 +57,7 @@ public:
     void SetCallBack(button_callback_type callback, void* parameter = nullptr);
     void SetDebounceDuration(uint16_t debounce_duration) { _debounce_duration = debounce_duration; }
     void SetHoldDuration(uint16_t hold_duration) { _hold_duration = hold_duration; }
-    void Update();
+    bool Update();
 
     bool IsBeingPush();
     bool Pushed();
