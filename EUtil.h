@@ -43,7 +43,7 @@ private:
 class EButton
 {
 public:
-    enum BUTTON_CALLBACK_EVENT
+    enum BUTTON_EVENT
     {
         BUTTON_STAND_BY,
         BUTTON_PUSHED,
@@ -51,13 +51,13 @@ public:
         BUTTON_HOLDED,
     };
 
-    typedef void (*button_callback_type)(void*, BUTTON_CALLBACK_EVENT);
+    typedef void (*button_callback_type)(void*, BUTTON_EVENT);
 
     void SetupButton(uint8_t pin, uint8_t input_mode, bool inverted_logic = false);
     void SetCallBack(button_callback_type callback, void* parameter = nullptr);
     void SetDebounceDuration(uint16_t debounce_duration) { _debounce_duration = debounce_duration; }
     void SetHoldDuration(uint16_t hold_duration) { _hold_duration = hold_duration; }
-    bool Update();
+    BUTTON_EVENT Update();
 
     bool IsBeingPush();
     bool Pushed();

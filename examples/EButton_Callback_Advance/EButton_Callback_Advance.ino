@@ -28,13 +28,13 @@ class TestClass
 public:
     TestClass() {}
 
-    static void CallBackWrapper(void* parameter, EButton::BUTTON_CALLBACK_EVENT event)
+    static void CallBackWrapper(void* parameter, EButton::BUTTON_EVENT event)
     {
         static_cast<TestClass*>(parameter)->CallBackMember(event);
     }
 
 private:
-    void CallBackMember(EButton::BUTTON_CALLBACK_EVENT event)
+    void CallBackMember(EButton::BUTTON_EVENT event)
     {
         switch (event)
         {

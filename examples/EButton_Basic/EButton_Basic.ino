@@ -53,7 +53,7 @@ void loop()
         Serial.println("The button has been released");
 }
 
-void CallBack(void* /*optional_parameter*/, EButton::BUTTON_CALLBACK_EVENT event)
+void CallBack(void* /*optional_parameter*/, EButton::BUTTON_EVENT event)
 {
     switch (event)
     {

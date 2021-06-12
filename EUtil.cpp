@@ -79,9 +79,9 @@ void EButton::SetCallBack(button_callback_type callback, void* parameter /*= nul
     _callback_parameter = parameter;
 }
 
-bool EButton::Update()
+EButton::BUTTON_EVENT EButton::Update()
 {
-    bool state_change = false;
+    BUTTON_EVENT event_type = BUTTON_STAND_BY;
     int8_t state = digitalRead(_pin);
 
     if (_last_debounce_state != state && !_debounce_timer.IsActive())
@@ -97,7 +97,7 @@ bool EButton::Update()
         {
             _hold_timer.Start(_hold_duration);
             _was_pushed = true;
-            state_change = true;
+            event_type = BUTTON_PUSHED;
 
             if (_callback_function)
                 _callback_function(_callback_parameter, BUTTON_PUSHED);
@@ -106,7 +106,7 @@ bool EButton::Update()
         {
             _hold_timer.Stop();
             _was_released = true;
-            state_change = true;
+            event_type = BUTTON_RELEASED;
 
             if (_callback_function)
                 _callback_function(_callback_parameter, BUTTON_RELEASED);
@@ -116,13 +116,13 @@ bool EButton::Update()
     if (IsBeingPush() && _hold_timer.HasExpire())
     {
         _was_holded = true;
-        state_change = true;
+        event_type = BUTTON_HOLDED;
 
         if (_callback_function)
             _callback_function(_callback_parameter, BUTTON_HOLDED);
     }
 
-    return state_change;
+    return event_type;
 }
 
 bool EButton::IsBeingPush()
