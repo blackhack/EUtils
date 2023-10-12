@@ -20,6 +20,11 @@
 
 #include "EUtil.h"
 
+ETimer::ETimer(uint32_t duration, bool oneShot, bool microSeconds) 
+{
+    Start(duration, oneShot, microSeconds);
+}
+
 bool ETimer::HasExpire()
 {
     if (!_active)

@@ -26,6 +26,9 @@
 class ETimer
 {
 public:
+    ETimer() {}
+    ETimer(uint32_t duration, bool oneShot = true, bool microSeconds = false);
+
     bool HasExpire();
     void Start(uint32_t duration, bool oneShot = true, bool microSeconds = false);
     void Stop() { _active = false; }
